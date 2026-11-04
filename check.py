@@ -5,7 +5,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-REF = re.compile(r'(?:src|href|poster)="([^"#]+)"')
+REF = re.compile(r'(?:src|href|poster)="([^"#?]+)')
 
 
 def exists_exact(path):

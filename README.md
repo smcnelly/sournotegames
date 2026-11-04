@@ -37,6 +37,10 @@ Everything is from `~/pickled`, nothing is mocked up:
 
 The art and text will drift as the game changes, so reshoot before launch.
 
+## When you change `site.css` or `site.js`
+
+Raise the `?v=` number where all the pages link to them. GitHub lets browsers keep each file for up to 10 minutes, so without a new number a phone can pair a new page with the old stylesheet, which can look badly broken.
+
 ## Before it goes live
 
 - `sournote.games` has no mail records, so `hello@` and `support@` won't receive anything until email is set up.
