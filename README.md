@@ -31,7 +31,7 @@ Everything is from `~/pickled`, nothing is mocked up:
 | On the site | From the game |
 |---|---|
 | `img/screens/*` | `--screen=map\|shop\|over --shot=PATH`, doubled with nearest neighbour |
-| `img/screens/title-wide.png` | The same title shot from a copy of the game with its window set to 860 x 360, timed between "Press Start" blinks. `title.png` is its middle 640 x 360, for phones |
+| `img/title/*` | The title screen in layers, so the logo can move as it does in the game: the scene without its players and ball, the letters from `art/logo.png`, the ribbon, Mr Pickle from `art/mascot.png`, and the scanlines and dark edge on top. Captured from a copy of the game at 860 x 360 by `trailer/title_layers.py`, which is local only |
 | `video/pickled-trailer.mp4` | Cut from real matches and the game's own art, fonts, music and effects |
 | `img/screens/pensioners-vs-monster.webp` | The game's Doreen and Maureen sprites and the Monster's key art |
 

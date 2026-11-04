@@ -72,9 +72,51 @@ p { margin: 0; }
 
 /* Home: Pickled leads, full width, in its own colours */
 .games { --line: var(--game-ink); background: var(--game-bg); color: var(--game-fg); }
-.hero-art { line-height: 0; }
 /* the title's logo sits at the top, so a short window loses only court from the bottom */
-.hero-art img { width: 100%; min-height: 220px; max-height: min(720px, calc(100svh - 280px)); object-fit: cover; object-position: 50% 0; }
+.hero-art { line-height: 0; overflow: hidden; min-height: 220px; max-height: min(720px, calc(100svh - 280px)); }
+/* the game's 860 x 360 title screen: everything inside is placed in its pixels, so the layers can't drift apart at any size. 525.6px is 220px tall */
+.stage { --w: max(100%, 525.6px); display: block; position: relative; width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
+.plate { width: 100%; }
+.letter { position: absolute; left: calc(var(--x) / 860 * 100%); top: calc(16 / 360 * 100%); width: calc(84 / 860 * 100%); height: calc(112 / 360 * 100%); background: url(img/title/letters.png) calc(var(--i) / 6 * 100%) 0 / 700% 100%; }
+.ribbon { position: absolute; left: calc(294 / 860 * 100%); top: calc(115 / 360 * 100%); width: calc(276 / 860 * 100%); transform-origin: 49.28% 46.81%; }
+.mascot { position: absolute; left: calc(664 / 860 * 100%); top: calc(60 / 360 * 100%); width: calc(40 / 860 * 100%); transform-origin: 50% 100%; }
+.glass { position: absolute; inset: 0; width: 100%; height: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .letter { animation: bob 1.8s step-end calc(var(--i) * .1s) infinite; }
+  .ribbon { animation: swell 1.8s step-end infinite; }
+  .mascot { animation: hop 1.3s linear infinite, squash 1.3s linear infinite; }
+}
+/* the start screen's own motion in menu.gd: a cosine, snapped to whole game pixels. A letter's frame is 112 pixels tall, a ribbon 272 wide */
+@keyframes bob {
+  8.6%, 84.7% { transform: translateY(calc(-1 / 112 * 100%)); }
+  15.3%, 79.6% { transform: translateY(calc(-2 / 112 * 100%)); }
+  20.4%, 75% { transform: translateY(calc(-3 / 112 * 100%)); }
+  25%, 70.4% { transform: translateY(calc(-4 / 112 * 100%)); }
+  29.6%, 65.3% { transform: translateY(calc(-5 / 112 * 100%)); }
+  34.7%, 58.6% { transform: translateY(calc(-6 / 112 * 100%)); }
+  41.4% { transform: translateY(calc(-7 / 112 * 100%)); }
+  91.4% { transform: none; }
+}
+@keyframes swell {
+  10.2%, 81.5% { transform: scale(1.008); }
+  18.5%, 75% { transform: scale(1.016); }
+  25%, 68.5% { transform: scale(1.024); }
+  31.5%, 60.2% { transform: scale(1.032); }
+  39.8% { transform: scale(1.04); }
+  89.8% { transform: none; }
+}
+/* his hop, also from menu.gd: squash, up, a stretch, a hang at the top, down, squash. 20 game pixels is 31.25% of his height */
+@keyframes hop {
+  0%, 12% { translate: 0 0; animation-timing-function: cubic-bezier(.61, 1, .88, 1); }
+  42%, 58% { translate: 0 -31.25%; animation-timing-function: cubic-bezier(.12, 0, .39, 0); }
+  86%, 100% { translate: 0 0; }
+}
+@keyframes squash {
+  0%, 58%, 100% { scale: 1; }
+  12% { scale: 1.14 .86; }
+  42% { scale: .9 1.1; }
+  86% { scale: 1.12 .88; }
+}
 .games-in { display: flex; flex-direction: column; gap: 56px; padding-block: 28px 72px; }
 .pitch { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 48px; }
 .pitch-copy { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
@@ -105,7 +147,10 @@ p { margin: 0; }
 .copy { min-height: 44px; padding: 0 16px; font-family: var(--mono); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--fg); background: var(--bg); border: 2px solid var(--line); cursor: pointer; }
 
 @media (min-width: 1721px) {
-  .hero-art img { image-rendering: pixelated; } /* past its source size, keep the pixels square */
+  .hero-art img, .letter { image-rendering: pixelated; } /* past its source size, keep the pixels square */
+}
+@media (max-width: 699px) {
+  .stage { --w: max(134.375%, 525.6px); } /* phones get the game's own 640 x 360 middle of the screen */
 }
 @media (max-width: 960px) {
   .run { grid-template-columns: repeat(2, minmax(0, 1fr)); }
