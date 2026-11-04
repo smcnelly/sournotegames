@@ -10,6 +10,7 @@
   --pop-fg: #0C0F0A;
   --dot: #DCE3CE;
   --word: #0C0F0A;    /* wordmark ink */
+  --mark-line: #0C0F0A; /* the small pickle's outline */
   --display: 'Pixelify Sans', 'Courier New', monospace;
   --body: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -20,12 +21,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0C0F0A; --fg: #F4F7EC; --muted: #B4BDA8; --panel: #1A2016; --line: #3A4434;
-    --accent: #A6F566; --dot: #1A2016; --word: #A6F566; color-scheme: dark;
+    --accent: #A6F566; --dot: #1A2016; --word: #A6F566; --mark-line: #4A7B24; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0C0F0A; --fg: #F4F7EC; --muted: #B4BDA8; --panel: #1A2016; --line: #3A4434;
-  --accent: #A6F566; --dot: #1A2016; --word: #A6F566; color-scheme: dark;
+  --accent: #A6F566; --dot: #1A2016; --word: #A6F566; --mark-line: #4A7B24; color-scheme: dark;
 }
 html { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
 body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.55; }
@@ -53,7 +54,8 @@ p { margin: 0; }
 .foot { border-top: 2px solid var(--line); background: var(--bg); }
 .foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-block: 28px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .foot-id { display: flex; align-items: center; gap: 12px; }
-.foot-id svg { width: 55px; height: 28px; flex: none; } /* the full mark at 1x: the 16 px one loses its outline on dark and looks chopped */
+.foot-id svg { width: 32px; height: 32px; }
+.mark-line { fill: var(--mark-line); } /* on dark a black outline vanishes and the pickle looks chopped, so it borrows the pickle's own shadow green */
 .foot nav { display: flex; gap: 20px; }
 .foot nav a { color: var(--fg); padding-block: 12px; }
 
