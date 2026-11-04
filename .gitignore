@@ -1,0 +1,5 @@
+.claude/
+.DS_Store
+__pycache__/
+# trailer tools and masters stay on this machine; the site only needs video/
+trailer/

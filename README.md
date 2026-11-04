@@ -1,0 +1,43 @@
+# Sour Note Games
+
+The studio site. Plain HTML, CSS and JS with no build step, made for GitHub Pages.
+
+## Run it locally
+
+```bash
+python3 -m http.server 8765
+```
+
+Then open http://localhost:8765.
+
+## Check it
+
+```bash
+python3 check.py
+```
+
+Fails if a page points at a file that isn't there. GitHub Pages is case-sensitive and a Mac isn't, so it compares exact names.
+
+## Publish it
+
+Push this folder to a GitHub repo, then Settings > Pages > Deploy from a branch > `main`, `/ (root)`. `.nojekyll` stops GitHub running Jekyll over it.
+
+The social card (`og:image` and `og:url` in `index.html`) points at `https://smcnelly.github.io/sournotegames/`. To move to `sournote.games`, add it under Settings > Pages > Custom domain, point its DNS at GitHub, and change those two tags.
+
+## Where the Pickled material comes from
+
+Everything is from `~/pickled`, nothing is mocked up:
+
+| On the site | From the game |
+|---|---|
+| `img/screens/*` | `--screen=map\|shop\|over --shot=PATH`, doubled with nearest neighbour |
+| `img/screens/title-wide.png` | The same title shot from a copy of the game with its window set to 860 x 360, timed between "Press Start" blinks. `title.png` is its middle 640 x 360, for phones |
+| `video/pickled-trailer.mp4` | Cut from real matches and the game's own art, fonts, music and effects |
+| `img/screens/pensioners-vs-monster.webp` | The game's Doreen and Maureen sprites and the Monster's key art |
+
+The art and text will drift as the game changes, so reshoot before launch.
+
+## Before it goes live
+
+- `sournote.games` has no mail records, so `hello@` and `support@` won't receive anything until email is set up.
+- When the Steam page exists, point the "Watch the trailer" button in `index.html` at it and relabel it to wishlist.

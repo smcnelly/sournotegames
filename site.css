@@ -1,0 +1,115 @@
+/* Layout: one centred column of full-width bands; the pixel grid and the black 2px outline are the only ornament */
+:root {
+  --bg: #F4F7EC;      /* Vinegar */
+  --fg: #0C0F0A;      /* Brine Black */
+  --muted: #4A5442;
+  --panel: #E6EBDB;   /* Jar */
+  --line: #0C0F0A;
+  --accent: #145A1E;  /* Dill: links and labels */
+  --pop: #FFE14A;     /* Seed Yellow: the one sour note */
+  --pop-fg: #0C0F0A;
+  --dot: #DCE3CE;
+  --word: #0C0F0A;    /* wordmark ink */
+  --display: 'Pixelify Sans', 'Courier New', monospace;
+  --body: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Pickled keeps its own world: the same in both themes */
+  --game-bg: #3B1E7A; --game-fg: #FFF4E0; --game-muted: #E3D6F5;
+  --game-ink: #1A1033;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C0F0A; --fg: #F4F7EC; --muted: #B4BDA8; --panel: #1A2016; --line: #3A4434;
+    --accent: #A6F566; --dot: #1A2016; --word: #A6F566; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C0F0A; --fg: #F4F7EC; --muted: #B4BDA8; --panel: #1A2016; --line: #3A4434;
+  --accent: #A6F566; --dot: #1A2016; --word: #A6F566; color-scheme: dark;
+}
+html { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.55; }
+h1, h2, h3, .line, .btn, .mail a, .mailbox a { font-variant-ligatures: none; } /* Pixelify Sans draws "fi" as something like an A: "fire" read "Are" */
+img, video { display: block; max-width: 100%; height: auto; }
+[hidden] { display: none !important; } /* or the img rule above beats it */
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--pop); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.08; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px; padding-block: 12px; }
+.brand { display: block; color: var(--word); line-height: 0; }
+.brand svg { width: 262px; height: auto; } /* 2x: the logo only ever scales in whole multiples */
+.top nav { display: flex; gap: 24px; font-family: var(--mono); font-size: 14px; letter-spacing: 1px; text-transform: uppercase; }
+.top nav a { color: var(--fg); text-decoration: none; padding-block: 12px; }
+.top nav a:hover { color: var(--accent); text-decoration: underline; }
+
+.foot { border-top: 2px solid var(--line); background: var(--bg); }
+.foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-block: 28px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.foot-id { display: flex; align-items: center; gap: 12px; }
+.foot-id svg { width: 32px; height: 32px; }
+.foot nav { display: flex; gap: 20px; }
+.foot nav a { color: var(--fg); padding-block: 12px; }
+
+/* Support and privacy */
+.doc { max-width: 720px; padding-block: 40px 80px; display: flex; flex-direction: column; gap: 32px; }
+.doc h1 { font-size: clamp(36px, 6vw, 52px); }
+.doc h2 { font-size: 24px; }
+.doc section { display: flex; flex-direction: column; gap: 12px; }
+.doc p, .doc li { color: var(--muted); }
+.doc ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+.updated { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.mailbox { padding: 24px; border: 2px solid var(--line); background: var(--panel); display: flex; flex-direction: column; gap: 6px; }
+.mailbox a { font-family: var(--display); font-weight: 700; font-size: clamp(18px, 5vw, 30px); color: var(--fg); overflow-wrap: anywhere; }
+
+/* Home: Pickled leads, full width, in its own colours */
+.games { --line: var(--game-ink); background: var(--game-bg); color: var(--game-fg); }
+.hero-art { line-height: 0; }
+/* the title's logo sits at the top, so a short window loses only court from the bottom */
+.hero-art img { width: 100%; min-height: 220px; max-height: min(720px, calc(100svh - 280px)); object-fit: cover; object-position: 50% 0; }
+.games-in { display: flex; flex-direction: column; gap: 56px; padding-block: 28px 72px; }
+.pitch { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 48px; }
+.pitch-copy { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.line { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; text-wrap: balance; }
+.sub { font-size: 18px; color: var(--game-muted); }
+.btn { display: inline-flex; align-items: center; min-height: 56px; padding: 0 28px; font-family: var(--display); font-weight: 700; font-size: 20px; text-decoration: none; color: var(--pop-fg); background: var(--pop); border: 2px solid var(--line); box-shadow: 4px 4px 0 var(--line); }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--line); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--line); }
+.frame { border: 2px solid var(--game-ink); box-shadow: 8px 8px 0 var(--game-ink); background: var(--game-ink); scroll-margin-top: 24px; }
+.clip video { width: 100%; aspect-ratio: 16 / 9; background: var(--game-ink); }
+.run { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 24px; }
+.run article { display: flex; flex-direction: column; gap: 12px; }
+.shot { box-sizing: border-box; aspect-ratio: 640 / 401; overflow: hidden; border: 2px solid var(--game-ink); box-shadow: 4px 4px 0 var(--game-ink); margin-bottom: 8px; background: var(--game-ink); }
+.shot img { width: 100%; height: 100%; object-fit: cover; }
+.run h2 { font-size: 22px; }
+.run p { color: var(--game-muted); font-size: 16px; }
+
+/* Home: the studio, briefly */
+/* the page's pixel grid survives here, painted on the band */
+.studio { background: var(--bg) radial-gradient(var(--dot) 1.5px, transparent 1.5px) 0 0 / 16px 16px; }
+.studio-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px 64px; padding-block: 64px; }
+.studio-copy { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.studio h2 { font-size: clamp(28px, 3.6vw, 40px); }
+.studio-copy p { color: var(--muted); max-width: 30em; }
+.reach { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.mail a { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 2.6vw, 28px); color: var(--fg); overflow-wrap: anywhere; }
+.copy { min-height: 44px; padding: 0 16px; font-family: var(--mono); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--fg); background: var(--bg); border: 2px solid var(--line); cursor: pointer; }
+
+@media (min-width: 1721px) {
+  .hero-art img { image-rendering: pixelated; } /* past its source size, keep the pixels square */
+}
+@media (max-width: 960px) {
+  .run { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .brand svg { width: 131px; } /* 1x, the smallest the lockup goes, so the game gets the screen */
+  .run { grid-template-columns: minmax(0, 1fr); }
+  .btn { align-self: stretch; justify-content: center; width: 100%; box-sizing: border-box; }
+}
