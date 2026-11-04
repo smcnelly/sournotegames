@@ -22,7 +22,7 @@ Fails if a page points at a file that isn't there. GitHub Pages is case-sensitiv
 
 Push this folder to a GitHub repo, then Settings > Pages > Deploy from a branch > `main`, `/ (root)`. `.nojekyll` stops GitHub running Jekyll over it.
 
-The social card (`og:image` and `og:url` in `index.html`) points at `https://smcnelly.github.io/sournotegames/`. To move to `sournote.games`, add it under Settings > Pages > Custom domain, point its DNS at GitHub, and change those two tags.
+The site lives at `https://sournote.games/`, set by the `CNAME` file, with the domain's DNS pointing at GitHub. The social card (`og:image` and `og:url` in `index.html`) uses that address too.
 
 ## Where the Pickled material comes from
 
