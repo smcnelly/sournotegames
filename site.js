@@ -38,14 +38,3 @@ if ('IntersectionObserver' in window) {
     }
   }, { threshold: 0.4 }).observe(video);
 }
-
-// Anything that moves forever needs a way to stop it. Visitors who asked for less motion get neither the motion nor the button
-var still = document.getElementById('still');
-if (!calm) {
-  still.hidden = false;
-  still.addEventListener('click', function () {
-    var paused = still.getAttribute('aria-pressed') !== 'true';
-    still.setAttribute('aria-pressed', paused);
-    document.querySelector('.stage').classList.toggle('paused', paused);
-  });
-}

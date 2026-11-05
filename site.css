@@ -86,13 +86,6 @@ p { margin: 0; }
 .ribbon { position: absolute; left: calc(294 / 860 * 100%); top: calc(115 / 360 * 100%); width: calc(276 / 860 * 100%); transform-origin: 49.28% 46.81%; }
 .mascot { position: absolute; left: calc(664 / 860 * 100%); top: calc(60 / 360 * 100%); width: calc(40 / 860 * 100%); transform-origin: 50% 100%; }
 .glass { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero { position: relative; }
-/* on the grass, the one corner of the title that stays empty at every size */
-.still { position: absolute; bottom: 12px; right: max(12px, env(safe-area-inset-right, 0px)); display: grid; place-items: center; width: 44px; height: 44px; padding: 0; color: var(--game-fg); background: var(--game-ink); border: 2px solid var(--game-fg); cursor: pointer; }
-.still svg { width: 16px; height: 16px; fill: currentColor; }
-.still .arrow, .still[aria-pressed="true"] .bars { display: none; }
-.still[aria-pressed="true"] .arrow { display: inline; }
-.stage.paused * { animation-play-state: paused; }
 @media (prefers-reduced-motion: no-preference) {
   .letter { animation: bob 1.8s step-end calc(var(--i) * .1s) infinite; }
   .ribbon { animation: swell 1.8s step-end infinite; }
