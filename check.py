@@ -27,9 +27,14 @@ for page in pages:
     for ref in REF.findall(text):
         if re.match(r"[a-z]+:|//", ref):
             continue
+        if page == "404.html":  # served for a missing address at any depth, so its links must start from the root
+            assert ref.startswith("/"), f"{page}: {ref} breaks on a deep address"
+            ref = ref.lstrip("/") or "index.html"
         assert not ref.startswith("/"), f"{page}: {ref} is root-relative and breaks on a project site"
         if not exists_exact(os.path.join(ROOT, ref)):
             bad.append(f"{page}: {ref}")
+    if page == "404.html":
+        continue  # not a page anyone should search for
     url = "https://sournote.games/" + ("" if page == "index.html" else page)
     if f'<link rel="canonical" href="{url}">' not in text:
         bad.append(f"{page}: no canonical link to {url}")

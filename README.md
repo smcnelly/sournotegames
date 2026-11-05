@@ -50,4 +50,4 @@ Raise the `?v=` number where all the pages link to them. GitHub lets browsers ke
 
 ## When you add a page
 
-Add it to `sitemap.xml` and give it a description and a canonical link. `check.py` fails if you don't.
+Add it to `sitemap.xml` and give it a description and a canonical link. `check.py` fails if you don't. `404.html` is the exception: it stays out of the sitemap, and its links start with `/` because GitHub serves it at any depth.

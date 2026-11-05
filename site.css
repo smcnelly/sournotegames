@@ -97,6 +97,7 @@ p { margin: 0; }
   .letter { animation: bob 1.8s step-end calc(var(--i) * .1s) infinite; }
   .ribbon { animation: swell 1.8s step-end infinite; }
   .mascot { animation: hop 1.3s linear infinite, squash 1.3s linear infinite; }
+  .lost img { animation: hop 1.3s linear 3, squash 1.3s linear 3; } /* three hops is about 4 seconds, short enough to need no pause button */
 }
 /* the start screen's own motion in menu.gd: a cosine, snapped to whole game pixels. A letter's frame is 112 pixels tall, a ribbon 272 wide */
 @keyframes bob {
@@ -157,6 +158,14 @@ p { margin: 0; }
 .mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .mail a { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 2.6vw, 28px); color: var(--fg); overflow-wrap: anywhere; }
 .copy { min-height: 44px; padding: 0 16px; font-family: var(--mono); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--fg); background: var(--bg); border: 2px solid var(--line); cursor: pointer; }
+
+/* The 404 */
+.lost { box-sizing: border-box; min-height: 60svh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 56px 16px; text-align: center; }
+.lost img { width: 80px; margin-bottom: 8px; image-rendering: pixelated; transform-origin: 50% 100%; }
+.lost .eyebrow { color: var(--game-muted); }
+.lost h1 { font-size: clamp(36px, 7vw, 56px); }
+.lost p:not(.eyebrow) { font-size: 18px; color: var(--game-muted); }
+.lost .btn { margin-top: 20px; }
 
 @media (min-width: 1721px) {
   .hero-art img, .letter { image-rendering: pixelated; } /* past its source size, keep the pixels square */
