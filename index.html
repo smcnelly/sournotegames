@@ -7,6 +7,8 @@
 <meta name="description" content="Set the ball on fire. Drop a piano on someone. Lose to a pensioner anyway. Pickled is an arcade pickleball roguelite game, coming to Steam, iOS and Android from Sour Note Games.">
 <link rel="canonical" href="https://sournote.games/">
 <link rel="preload" as="image" href="img/title/letters.png">
+<link rel="preload" as="font" type="font/woff2" href="fonts/pixelify-sans-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/bricolage-grotesque.woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sour Note Games">
 <meta property="og:title" content="Pickled: A Pickleball Saga, from Sour Note Games">
@@ -54,7 +56,7 @@
       "@id": "https://sournote.games/#trailer",
       "name": "Pickled: A Pickleball Saga trailer",
       "description": "Doubles pickleball against knitting pensioners, a dog, a goat and a sea monster, with upgrades, huge special moves and bosses, coming to Steam, iOS and Android.",
-      "thumbnailUrl": "https://sournote.games/img/screens/rally.png",
+      "thumbnailUrl": "https://sournote.games/img/screens/rally.webp",
       "uploadDate": "2026-11-04T20:29:57+08:00",
       "duration": "PT1M17S",
       "contentUrl": "https://sournote.games/video/pickled-trailer.mp4"
@@ -65,9 +67,7 @@
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600&family=DM+Mono:wght@400;500&family=Pixelify+Sans:wght@700&display=swap">
-<link rel="stylesheet" href="site.css?v=2">
+<link rel="stylesheet" href="site.css?v=3">
 </head>
 <body>
 
@@ -81,9 +81,10 @@
 
 <main>
   <section class="games" id="games">
+    <div class="hero">
     <h1 class="hero-art">
       <span class="stage">
-        <img class="plate" src="img/title/plate.png" width="1720" height="720" alt="Pickled: A Pickleball Saga">
+        <img class="plate" src="img/title/plate.png" width="1720" height="720" fetchpriority="high" alt="Pickled: A Pickleball Saga">
         <span class="letter" style="--i: 0; --x: 202"></span>
         <span class="letter" style="--i: 1; --x: 269"></span>
         <span class="letter" style="--i: 2; --x: 322"></span>
@@ -93,9 +94,11 @@
         <span class="letter" style="--i: 6; --x: 583"></span>
         <img class="ribbon" src="img/title/ribbon.png" width="552" height="94" alt="">
         <img class="mascot" src="img/title/mascot.png" width="80" height="128" alt="">
-        <img class="glass" src="img/title/glass.png" width="1720" height="720" alt="">
+        <img class="glass" src="img/title/glass.png" width="1720" height="720" fetchpriority="high" alt="">
       </span>
     </h1>
+    <button class="still" id="still" type="button" aria-label="Pause the title animation" aria-pressed="false" hidden><svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><path class="bars" d="M1 0h2v8h-2zM5 0h2v8h-2z"/><path class="arrow" d="M1 0h2v8h-2zM3 1h1v6h-1zM4 2h1v4h-1zM5 3h1v2h-1z"/></svg></button>
+    </div>
     <div class="wrap games-in">
       <div class="pitch">
         <div class="pitch-copy">
@@ -106,15 +109,16 @@
       </div>
 
       <div class="frame clip" id="trailer">
-        <video controls loop muted playsinline preload="none" width="1280" height="720" poster="img/screens/rally.png" aria-label="The Pickled trailer: doubles pickleball against knitting pensioners, a dog, a goat and a sea monster, with upgrades, huge special moves and bosses, coming to Steam, iOS and Android.">
+        <video controls loop muted playsinline preload="none" width="1280" height="720" poster="img/screens/rally.webp" aria-label="The Pickled trailer: doubles pickleball against knitting pensioners, a dog, a goat and a sea monster, with upgrades, huge special moves and bosses, coming to Steam, iOS and Android.">
           <source src="video/pickled-trailer.mp4" type="video/mp4">
+          <track kind="captions" src="video/pickled-trailer.vtt" srclang="en" label="English">
           <a href="video/pickled-trailer.mp4">Watch the Pickled trailer</a>
         </video>
       </div>
 
       <div class="run">
         <article>
-          <div class="shot"><img src="img/screens/map.png" width="1280" height="802" loading="lazy" alt="The Local Championship map: a green board of round stops joined by dashed roads, with a boss crown at the far end and your stats on a card beside it."></div>
+          <div class="shot"><img src="img/screens/map.webp" width="1280" height="802" loading="lazy" alt="The Local Championship map: a green board of round stops joined by dashed roads, with a boss crown at the far end and your stats on a card beside it."></div>
           <h2>Choose your route</h2>
           <p>Climb from the local park to the world final. You pick every stop: matches, shops, rest stops and events.</p>
         </article>
@@ -124,12 +128,12 @@
           <p>Challenge everyone from pensioners to sea monsters. The sea monsters are the easy bit.</p>
         </article>
         <article>
-          <div class="shot"><img src="img/screens/shop.png" width="1280" height="802" loading="lazy" alt="The Pro Shop: paddles swinging from a rail, price tags on each, and a pickle behind the counter saying fresh gear, champ, take a look."></div>
+          <div class="shot"><img src="img/screens/shop.webp" width="1280" height="802" loading="lazy" alt="The Pro Shop: paddles swinging from a rail, price tags on each, and a pickle behind the counter saying fresh gear, champ, take a look."></div>
           <h2>Build your kit</h2>
           <p>Buy paddles, shoes, balls, wild serves and Specials between matches. Anyone you've beaten can be signed as your partner.</p>
         </article>
         <article>
-          <div class="shot"><img src="img/screens/knees.png" width="1280" height="802" loading="lazy" alt="The game over screen, on red rays: Your Knees Have Gone. One more game?"></div>
+          <div class="shot"><img src="img/screens/knees.webp" width="1280" height="802" loading="lazy" alt="The game over screen, on red rays: Your Knees Have Gone. One more game?"></div>
           <h2>Mind your knees</h2>
           <p>You have three, and every lost match costs one. Lose them all and the run ends, but what you've unlocked stays.</p>
         </article>
@@ -148,6 +152,7 @@
         <div class="mail">
           <a id="email" href="mailto:hello@sournote.games">hello@sournote.games</a>
           <button class="copy" id="copy-email" type="button">Copy</button>
+          <span class="vh" id="copy-status" role="status"></span>
         </div>
       </div>
     </div>
@@ -164,6 +169,6 @@
   </div>
 </footer>
 
-<script src="site.js?v=2"></script>
+<script src="site.js?v=3"></script>
 </body>
 </html>

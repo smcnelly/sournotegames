@@ -1,4 +1,7 @@
 /* Layout: one centred column of full-width bands; the pixel grid and the black 2px outline are the only ornament */
+@font-face { font-family: 'Pixelify Sans'; font-weight: 700; font-display: swap; src: url(fonts/pixelify-sans-700.woff2) format('woff2'); }
+@font-face { font-family: 'Bricolage Grotesque'; font-weight: 400 600; font-display: swap; src: url(fonts/bricolage-grotesque.woff2) format('woff2'); }
+@font-face { font-family: 'DM Mono'; font-weight: 400; font-display: swap; src: url(fonts/dm-mono-400.woff2) format('woff2'); }
 :root {
   --bg: #F4F7EC;      /* Vinegar */
   --fg: #0C0F0A;      /* Brine Black */
@@ -8,6 +11,7 @@
   --accent: #145A1E;  /* Dill: links and labels */
   --pop: #FFE14A;     /* Seed Yellow: the one sour note */
   --pop-fg: #0C0F0A;
+  --focus: var(--fg);   /* yellow barely shows on the light page, but it's right on the game's purple */
   --dot: #DCE3CE;
   --word: #0C0F0A;    /* wordmark ink */
   --mark-line: #0C0F0A; /* the small pickle's outline */
@@ -39,7 +43,8 @@ img, video { display: block; max-width: 100%; height: auto; }
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 a { color: var(--accent); text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--pop); outline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.08; text-wrap: balance; margin: 0; }
 p { margin: 0; }
 .eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
@@ -71,7 +76,7 @@ p { margin: 0; }
 .mailbox a { font-family: var(--display); font-weight: 700; font-size: clamp(18px, 5vw, 30px); color: var(--fg); overflow-wrap: anywhere; }
 
 /* Home: Pickled leads, full width, in its own colours */
-.games { --line: var(--game-ink); background: var(--game-bg); color: var(--game-fg); }
+.games { --line: var(--game-ink); --focus: var(--pop); background: var(--game-bg); color: var(--game-fg); }
 /* the title's logo sits at the top, so a short window loses only court from the bottom */
 .hero-art { line-height: 0; overflow: hidden; min-height: 220px; max-height: min(720px, calc(100svh - 280px)); }
 /* the game's 860 x 360 title screen: everything inside is placed in its pixels, so the layers can't drift apart at any size. 525.6px is 220px tall */
@@ -81,6 +86,13 @@ p { margin: 0; }
 .ribbon { position: absolute; left: calc(294 / 860 * 100%); top: calc(115 / 360 * 100%); width: calc(276 / 860 * 100%); transform-origin: 49.28% 46.81%; }
 .mascot { position: absolute; left: calc(664 / 860 * 100%); top: calc(60 / 360 * 100%); width: calc(40 / 860 * 100%); transform-origin: 50% 100%; }
 .glass { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero { position: relative; }
+/* on the grass, the one corner of the title that stays empty at every size */
+.still { position: absolute; bottom: 12px; right: max(12px, env(safe-area-inset-right, 0px)); display: grid; place-items: center; width: 44px; height: 44px; padding: 0; color: var(--game-fg); background: var(--game-ink); border: 2px solid var(--game-fg); cursor: pointer; }
+.still svg { width: 16px; height: 16px; fill: currentColor; }
+.still .arrow, .still[aria-pressed="true"] .bars { display: none; }
+.still[aria-pressed="true"] .arrow { display: inline; }
+.stage.paused * { animation-play-state: paused; }
 @media (prefers-reduced-motion: no-preference) {
   .letter { animation: bob 1.8s step-end calc(var(--i) * .1s) infinite; }
   .ribbon { animation: swell 1.8s step-end infinite; }

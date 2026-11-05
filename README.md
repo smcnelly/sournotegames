@@ -33,9 +33,12 @@ Everything is from `~/pickled`, nothing is mocked up:
 | `img/screens/*` | `--screen=map\|shop\|over --shot=PATH`, doubled with nearest neighbour |
 | `img/title/*` | The title screen in layers, so the logo can move as it does in the game: the scene without its players and ball, the letters from `art/logo.png`, the ribbon, Mr Pickle from `art/mascot.png`, and the scanlines and dark edge on top. Captured from a copy of the game at 860 x 360 by `trailer/title_layers.py`, which is local only |
 | `video/pickled-trailer.mp4` | Cut from real matches and the game's own art, fonts, music and effects |
+| `video/pickled-trailer.vtt` | The trailer's captions, written from the cut by `trailer/captions.py`. Run it again whenever the cut changes |
 | `img/screens/pensioners-vs-monster.webp` | The game's Doreen and Maureen sprites and the Monster's key art |
 
 The art and text will drift as the game changes, so reshoot before launch.
+
+The fonts in `fonts/` are the Latin files of Pixelify Sans, Bricolage Grotesque and DM Mono from Google Fonts, under the licence in `fonts/OFL.txt`. They live here so the first paint doesn't wait on Google and visitors' addresses don't go there. Screenshots are WebP, lossless except the trailer's poster.
 
 ## When you change `site.css` or `site.js`
 
