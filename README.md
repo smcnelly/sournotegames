@@ -43,5 +43,8 @@ Raise the `?v=` number where all the pages link to them. GitHub lets browsers ke
 
 ## Before it goes live
 
-- `sournote.games` has no mail records, so `hello@` and `support@` won't receive anything until email is set up.
-- When the Steam page exists, point the "Watch the trailer" button in `index.html` at it and relabel it to wishlist.
+- When the Steam page exists, point the "Watch the trailer" button in `index.html` at it and relabel it to wishlist, and add its address to the game's structured data as `sameAs`.
+
+## When you add a page
+
+Add it to `sitemap.xml` and give it a description and a canonical link. `check.py` fails if you don't.
