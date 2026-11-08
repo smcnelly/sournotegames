@@ -82,16 +82,37 @@ p { margin: 0; }
 /* the game's 860 x 360 title screen: everything inside is placed in its pixels, so the layers can't drift apart at any size. 525.6px is 220px tall */
 .stage { --w: max(100%, 525.6px); display: block; position: relative; width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
 .plate { width: 100%; }
+.moon { position: absolute; left: calc(355 / 860 * 100%); top: calc(75 / 360 * 100%); width: calc(150 / 860 * 100%); }
+.cloud { position: absolute; left: calc(var(--x) / 860 * 100%); top: calc(var(--y) / 360 * 100%); width: calc(var(--w) / 860 * 100%); }
+/* menu.gd's floodlight beam: 12 game pixels wide at the lamp, 80 at the far end, 160 long, at its average glow */
+.beam { position: absolute; left: calc((var(--x) - 40) / 860 * 100%); top: calc(86 / 360 * 100%); width: calc(80 / 860 * 100%); height: calc(160 / 360 * 100%); background: rgb(255 244 224 / .125); clip-path: polygon(42.5% 0, 57.5% 0, 100% 100%, 0 100%); transform-origin: 50% 0; }
+.fans { position: absolute; left: 0; top: calc(200 / 360 * 100%); width: 100%; }
 .letter { position: absolute; left: calc(var(--x) / 860 * 100%); top: calc(16 / 360 * 100%); width: calc(84 / 860 * 100%); height: calc(112 / 360 * 100%); background: url(img/title/letters.png) calc(var(--i) / 6 * 100%) 0 / 700% 100%; }
 .ribbon { position: absolute; left: calc(294 / 860 * 100%); top: calc(115 / 360 * 100%); width: calc(276 / 860 * 100%); transform-origin: 49.28% 46.81%; }
 .mascot { position: absolute; left: calc(664 / 860 * 100%); top: calc(60 / 360 * 100%); width: calc(40 / 860 * 100%); transform-origin: 50% 100%; }
-.glass { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ground, .glass { position: absolute; inset: 0; width: 100%; height: 100%; }
 @media (prefers-reduced-motion: no-preference) {
+  .moon { animation: spin 48s steps(576) infinite; } /* the game's 48 second turn, on its 12 fps clock */
+  .cloud { animation: drift calc((860 + var(--w)) / var(--v) * 1s) steps(950) calc((var(--x) + var(--w)) / var(--v) * -1s) infinite; }
+  .beam { animation: sweep 3s cubic-bezier(.37, 0, .63, 1) infinite alternate; }
+  .fans { animation: cheer .5s step-end infinite; }
   .letter { animation: bob 1.8s step-end calc(var(--i) * .1s) infinite; }
   .ribbon { animation: swell 1.8s step-end infinite; }
   .mascot { animation: hop 1.3s linear infinite, squash 1.3s linear infinite; }
   .lost img { animation: hop 1.3s linear 3, squash 1.3s linear 3; } /* three hops is about 4 seconds, short enough to need no pause button */
 }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* the game wraps its clouds where the screen hides it, but all 860 pixels show here, so each leaves completely. --x is where it rests, the delay starts it there, and each step is about a game pixel */
+@keyframes drift {
+  from { transform: translateX(calc((var(--x) + var(--w)) / var(--w) * -100%)); }
+  to { transform: translateX(calc((860 - var(--x)) / var(--w) * 100%)); }
+}
+@keyframes sweep {
+  from { transform: rotate(-10deg); }
+  to { transform: rotate(12deg); }
+}
+/* UI.crowd: half the fans are up while the other half are down, swapping four times a second. Each strip is one half, and 10% of a strip is the 2 pixel hop */
+@keyframes cheer { 50% { transform: translateY(var(--hop)); } }
 /* the start screen's own motion in menu.gd: a cosine, snapped to whole game pixels. A letter's frame is 112 pixels tall, a ribbon 272 wide */
 @keyframes bob {
   8.6%, 84.7% { transform: translateY(calc(-1 / 112 * 100%)); }
