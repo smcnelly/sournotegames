@@ -39,23 +39,13 @@ if ('IntersectionObserver' in window) {
   }, { threshold: 0.4 }).observe(video);
 }
 
-// The story's little clips play while they're on screen, unless the visitor asked for calm or is saving data, and each has its own pause
-document.querySelectorAll('.loop').forEach(function (shot) {
-  var clip = shot.querySelector('video');
-  var hold = shot.querySelector('button');
-  var on = !calm && !saving;
-  clip.muted = true;
-  var show = function () { hold.textContent = on ? 'Pause' : 'Play'; };
-  show();
-  hold.addEventListener('click', function () {
-    on = !on;
-    show();
-    if (on) clip.play().catch(function () {}); else clip.pause();
-  });
-  if ('IntersectionObserver' in window) {
+// The story's little clips play while they're on screen, unless the visitor asked for calm or is saving data
+if (!calm && !saving && 'IntersectionObserver' in window) {
+  document.querySelectorAll('.loop video').forEach(function (clip) {
+    clip.muted = true;
     new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting && on) clip.play().catch(function () {});
+      if (entries[0].isIntersecting) clip.play().catch(function () {});
       else clip.pause();
     }, { threshold: 0.4 }).observe(clip);
-  }
-});
+  });
+}
