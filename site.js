@@ -20,7 +20,7 @@ document.getElementById('copy-email').addEventListener('click', function () {
 });
 
 // The trailer only runs while it's on screen: paused when it's scrolled away, picking up again on the way back
-// Big screens start it muted when it arrives. Phones wait for a tap, with sound, so nobody pays 16 MB of data for a video they didn't ask for
+// Big screens start it muted when it arrives. Phones wait for a tap, with sound, so nobody pays 12 MB of data for a video they didn't ask for
 var video = document.querySelector('.clip video');
 var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var saving = navigator.connection && navigator.connection.saveData;
@@ -38,3 +38,24 @@ if ('IntersectionObserver' in window) {
     }
   }, { threshold: 0.4 }).observe(video);
 }
+
+// The story's little clips play while they're on screen, unless the visitor asked for calm or is saving data, and each has its own pause
+document.querySelectorAll('.loop').forEach(function (shot) {
+  var clip = shot.querySelector('video');
+  var hold = shot.querySelector('button');
+  var on = !calm && !saving;
+  clip.muted = true;
+  var show = function () { hold.textContent = on ? 'Pause' : 'Play'; };
+  show();
+  hold.addEventListener('click', function () {
+    on = !on;
+    show();
+    if (on) clip.play().catch(function () {}); else clip.pause();
+  });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && on) clip.play().catch(function () {});
+      else clip.pause();
+    }, { threshold: 0.4 }).observe(clip);
+  }
+});

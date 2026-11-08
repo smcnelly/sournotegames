@@ -30,11 +30,10 @@ Everything is from `~/pickled`, nothing is mocked up:
 
 | On the site | From the game |
 |---|---|
-| `img/screens/*` | `--screen=map\|shop\|over --shot=PATH`, doubled with nearest neighbour |
+| `img/story/*` and `video/loops/*` | Stills and short silent clips from the trailer's recordings, doubled with nearest neighbour |
 | `img/title/*` | The title screen in layers, so it can move as it does in the game. Sky, moon, clouds, ground and the two halves of the crowd are built from `art/title_*.png` and `menu.gd`'s numbers by `trailer/title_layers.py`, which is local only, and it takes the ticker and lit lamps from `trailer/title_plate.png`, the last flat capture. The beams are CSS. The letters from `art/logo.png`, the ribbon, Mr Pickle from `art/mascot.png`, and the scanlines and dark edge on top were captured from a copy of the game at 860 x 360 |
 | `video/pickled-trailer.mp4` | Cut from real matches and the game's own art, fonts, music and effects |
 | `video/pickled-trailer.vtt` | The trailer's captions, written from the cut by `trailer/captions.py`. Run it again whenever the cut changes |
-| `img/screens/pensioners-vs-monster.webp` | The game's Doreen and Maureen sprites and the Monster's key art |
 
 The art and text will drift as the game changes, so reshoot before launch.
 
