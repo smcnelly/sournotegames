@@ -20,7 +20,7 @@ document.getElementById('copy-email').addEventListener('click', function () {
 });
 
 // The trailer only runs while it's on screen: paused when it's scrolled away, picking up again on the way back
-// Big screens start it muted when it arrives. Phones wait for a tap, with sound, so nobody pays 12 MB of data for a video they didn't ask for
+// Big screens start it muted when it arrives. Phones wait for a tap, with sound, so nobody pays 15 MB of data for a video they didn't ask for
 var video = document.querySelector('.clip video');
 var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var saving = navigator.connection && navigator.connection.saveData;
